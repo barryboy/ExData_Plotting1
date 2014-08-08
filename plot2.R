@@ -41,12 +41,13 @@ make_plot2 <- function(quiet = FALSE){
         Sys.setlocale("LC_TIME", "English")
         #combining the Date and Time columns
         data$Timestamp <- strptime(paste(as.character(data$Date), as.character(data$Time)), format = "%d/%m/%Y %H:%M:%S")
+        
+        if(!quiet) { message("Opening png device") }
+        png("plot2.png", width = 480, height = 480)
+ 
         #drawing the plot with type = "l" to make it a continous line
-        if(!quiet) { message("Drawing the plot") }
         plot(data$Timestamp, data$Global_active_power, type = "l", xlab = "", ylab = "Global Active Power (kilowatts)")      
-        #copy the contents of graphical device
-        if(!quiet) { message("Saving .png file") }
-        dev.copy(png, file = "plot2.png")
+        
         dev.off()
         if(!quiet) { message("Finished.") }
 }

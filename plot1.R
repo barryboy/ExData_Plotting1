@@ -39,12 +39,12 @@ make_plot1 <- function(quiet = FALSE){
         ### PLOT ###
         #subset the data
         gap <- data[["Global_active_power"]]
-        #draw the histogram
-        if(!quiet) { message("Drawing the histogram") }
+        if(!quiet) { message("Opening png device") }
+        png("plot1.png", width = 480, height = 480)
+        
+        #drawing the histogram
         hist(gap[!is.na(gap)], xlab = "Global Active Power (kilowatts)", main = "Global Active Power", col = "red")
-        #copy the contents of graphical device
-        if(!quiet) { message("Saving .png file") }
-        dev.copy(png, file = "plot1.png")
+        
         dev.off()
         if(!quiet) { message("Finished.") }
 }
